@@ -7,11 +7,7 @@ narrative-schemas:
   - coursework
 ---
 
-uthor: Your name (student number)
-
-Before using these sets of documents, make sure you have everything installed
-correctly. Installation instructions are here:
-<https://github.com/gicentre/litvis/blob/main/documents/tutorials/introduction/installingLitvis.md>.
+Author: Adam Jennings (955770)
 
 These files serve two purposes: 1) to give you some templates that can help you prepare your submission and 2) examples of using elm-vegalite on the Pleiades dataset. **When preparing your submission remember to delete my code/text and replace it with your own!** If I submitted these visualizations as this coursework I wouldn't get a very good mark. They are far too basic :)
 
@@ -27,11 +23,18 @@ for the places, names, and locations in the database.
 
 ```elm {l}
 names : Data
-names = dataFromUrl "./pleiades-names-latest.csv" []
+names =
+    dataFromUrl "./pleiades-names-latest.csv" []
+
+
 locs : Data
-locs = dataFromUrl "./pleiades-locations-latest.csv" []
+locs =
+    dataFromUrl "./pleiades-locations-latest.csv" []
+
+
 places : Data
-places = dataFromUrl "./pleiades-places-latest.csv" []
+places =
+    dataFromUrl "./pleiades-places-latest.csv" []
 ```
 
 ## Getting started
@@ -47,14 +50,14 @@ Many locations have multiple types.
 ```elm {v}
 histo : Spec
 histo =
-  let
-    --trans = transform
-    enc =
-      encoding
-        << position Y [ pName "featureType"]
-        << position X [ pAggregate opCount ]
-  in
-  toVegaLite [ locs, enc [], bar [] ]
+    let
+        --trans = transform
+        enc =
+            encoding
+                << position Y [ pName "featureType" ]
+                << position X [ pAggregate opCount ]
+    in
+    toVegaLite [ locs, enc [], bar [] ]
 ```
 
 {(vistype|}
