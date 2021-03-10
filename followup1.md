@@ -18,8 +18,9 @@ describing the outline of each country. Note that I'm "stealing" the map data
 from the [vega site](https://vega.github.io).
 
 ```elm {l}
-mapData = dataFromUrl "https://vega.github.io/vega/data/world-110m.json"
-                      [ topojsonFeature "countries" ]
+mapData =
+    dataFromUrl "https://vega.github.io/vega/data/world-110m.json"
+        [ topojsonFeature "countries" ]
 ```
 
 Then we need to create a vega-lite layer to show the geographic data.
@@ -28,8 +29,8 @@ Then we need to create a vega-lite layer to show the geographic data.
 ```elm {l}
 mapSpec : Spec
 mapSpec =
-  asSpec
-    [ mapData, geoshape [ maFill "#4c566a" ] ]
+    asSpec
+        [ mapData, geoshape [ maFill "#4c566a" ] ]
 ```
 
 ### Settlement positions
@@ -40,8 +41,8 @@ as a kind of function that runs over the dataset.
 
 ```elm {l}
 settlementTrans =
-  transform
-    << filter (fiExpr "datum.featureType == 'settlement'")
+    transform
+        << filter (fiExpr "datum.featureType == 'settlement'")
 ```
 
 Then we can bring in the settlements which you can put on the map by basically making
@@ -49,9 +50,9 @@ a scatterplot but using the latitude and longitude.
 
 ```elm {l}
 settlementEnc =
-  encoding
-    << position Latitude [ pName "reprLat" ]
-    << position Longitude  [ pName "reprLong" ]
+    encoding
+        << position Latitude [ pName "reprLat" ]
+        << position Longitude [ pName "reprLong" ]
 ```
 
 And then we can put it all together. Ideally this map should zoom or at least
@@ -70,16 +71,16 @@ map
 ```elm {v}
 map : Spec
 map =
-  let
-    settlementSpec =
-      asSpec
-        [ locs
-        , settlementTrans []
-        , settlementEnc []
-        , point [ maStroke "", maFill "#a3be8c", maSize 2.9 ]
-        ]
-  in
-  toVegaLite [width 700, height 500, layer [ mapSpec, settlementSpec ] ]
+    let
+        settlementSpec =
+            asSpec
+                [ locs
+                , settlementTrans []
+                , settlementEnc []
+                , point [ maStroke "", maFill "#a3be8c", maSize 2.9 ]
+                ]
+    in
+    toVegaLite [ width 700, height 500, layer [ mapSpec, settlementSpec ] ]
 ```
 
 {(vismapping|}
