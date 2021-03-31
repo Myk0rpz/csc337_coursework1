@@ -9,77 +9,30 @@ narrative-schemas:
 
 Author: Adam Jennings (955770)
 
-These files serve two purposes: 1) to give you some templates that can help you prepare your submission and 2) examples of using elm-vegalite on the Pleiades dataset. **When preparing your submission remember to delete my code/text and replace it with your own!** If I submitted these visualizations as this coursework I wouldn't get a very good mark. They are far too basic :)
-
-# Ancient civilizations
-
-```elm {l=hidden}
-import VegaLite exposing (..)
-```
-
-There are 3 data files from [Pleiades](https://pleiades.stoa.org/). These
-need to be loaded into the interpreter. For reference, there is a separate file
-for the places, names, and locations in the database.
-
-```elm {l}
-names : Data
-names =
-    dataFromUrl "./pleiades-names-latest.csv" []
-
-
-locs : Data
-locs =
-    dataFromUrl "./pleiades-locations-latest.csv" []
-
-
-places : Data
-places =
-    dataFromUrl "./pleiades-places-latest.csv" []
-```
-
-## Getting started
-
-Looking at the CSV and [documentation](http://atlantides.org/downloads/pleiades/dumps/README.txt), we decide that maybe we'll start with a simple bar chart/histogram.
-
 {(aim|}
-This chart shows that certain categories occur much more frequently than others and that
-some data processing is needed to split the `featureType` column up by the delimeter.
-Many locations have multiple types.
+Observing what age of building there is and how frequent they show up around Europe.
 {|aim)}
 
-```elm {v}
-histo : Spec
-histo =
-    let
-        --trans = transform
-        enc =
-            encoding
-                << position Y [ pName "featureType" ]
-                << position X [ pAggregate opCount ]
-    in
-    toVegaLite [ locs, enc [], bar [] ]
-```
-
 {(vistype|}
-bar chart
+cumulative graphs with editable Featuretype(changing how many were built in both max date made and min date made)
 {|vistype)}
+
+<iframe src="graph3.html" ></iframe>
 
 {(vismapping|}
 
-**Note**: this should be a list of some type (here I'm using a dictionary list)
+x position
+: maxDate/minDate
 
 y position
-: featureType category
-
-length
-: count of location
+: cumulativeCount
 
 {|vismapping)}
 
 {(dataprep|}
-Data were aggregated by category to generate counts
+Data was agregated by timePeriods and altered by FeatureType
 {|dataprep)}
 
 {(limitations|}
-This is a very simple visualization and it's not clear what it yields.
+Fairly simple design, haveing both graphs overlap each other would be better as well as creating an average date line
 {|limitations)}
