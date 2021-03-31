@@ -3,14 +3,14 @@ follows: coursework
 ---
 
 {(aim|}
-Observing frequency of buildings in data set creating a density blotting graph showing what is more frequent where
+Observing frequency of buildings in data set creating a density plotting graph showing what is more frequent where
 {|aim)}
 
 {(vistype|}
 binned heatmap with GeoMap background
 {|vistype)}
 
-<iframe src="graph4.html" ></iframe>
+![alt text](graph3.png "Code and Preview")
 
 {(vismapping|}
 
@@ -29,7 +29,3 @@ Data was agregated by count of records
 {(limitations|}
 Data easy to read on what is the most frequent ares but not what is the least frequent area. Boxes in the binned heatmap are too big to show particularly denser areas.
 {|limitations)}
-
-```
-
-```
